@@ -1,9 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Weibo App</a>
-        <ul class="navbar-nav justify-content-end">
-            <li class="nav-item"><a class="nav-link" href="/help">帮助</a></li>
-            <li class="nav-item" ><a class="nav-link" href="#">登录</a></li>
-        </ul>
-    </div>
-</nav>
+<footer class="footer">
+  <img class="brand-icon" src="https://cdn.learnku.com/uploads/sites/KDiyAbV0hj1ytHpRTOlVpucbLebonxeX.png">
+  <a href="https://learnku.com/laravel/courses" target=_blank>
+    刻意练习，每日精进
+  </a>
+
+  <div class="float-right">
+    <a href="{{ route('about') }}" >关于</a>
+  </div>
+</footer>

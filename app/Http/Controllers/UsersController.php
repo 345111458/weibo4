@@ -16,6 +16,12 @@ class UsersController extends Controller
         $this->middleware('auth' , [
             'except'    =>  ['show','create','store']
         ]);
+
+        // 只让未登录用户访问注册页面：
+        $this->middleware('guest' , [
+            'only'  =>  ['create']
+        ]);
+
     }
 
     public function create()
@@ -63,6 +69,9 @@ class UsersController extends Controller
 
 
     public function update(User $user , Request $request){
+
+        $this->authorize('update' , $user);
+
 
         $this->validate($request , [
             'name' => 'required|max:50',

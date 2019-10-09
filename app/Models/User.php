@@ -121,7 +121,7 @@ class User extends Authenticatable
     // 用于判断当前登录的用户 A 是否关注了用户 B
     public function isFollowing($user_ids){
 
-        return $this->followings()->contains($user_ids);
+        return $this->followings->contains($user_ids);
     }
 
 

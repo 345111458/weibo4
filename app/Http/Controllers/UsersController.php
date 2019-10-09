@@ -42,10 +42,6 @@ class UsersController extends Controller
     }
 
 
-
-
-
-
     public function store(Request $request){
 
 
@@ -161,6 +157,26 @@ class UsersController extends Controller
                            ->paginate(10);
         return view('users.show', compact('user', 'statuses'));
     }
+
+
+    // 用户关注的人
+    public function followings(User $user){
+
+        $users = $user->followings()->paginate(10);
+        $title = $user->name . '关注的人';
+        return view('users.show_follow',compact('users','title'));
+    }
+
+
+    // 用户粉丝人数
+    public function followers(User $user){
+
+        $users = $user->followers()->paginate(10);
+        $title = $user->name . '的粉丝';
+        return view('users.show_follow',compact('users','title'));
+    }
+
+
 
     
 }

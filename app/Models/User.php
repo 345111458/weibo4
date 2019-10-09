@@ -57,6 +57,8 @@ class User extends Authenticatable
         static::creating(function($user){
             $user->activation_token = Str::random(10);
         });
+
+        
     }
 
 
@@ -80,7 +82,7 @@ class User extends Authenticatable
     // 我们可以通过 followers 来获取粉丝关系列表
     public function followers(){
 
-        return $this->belongsToMany(User::class,'followers','user_id','followers_id');
+        return $this->belongsToMany(User::class,'followers','user_id','follower_id');
     }
 
 
@@ -88,7 +90,7 @@ class User extends Authenticatable
     // 通过 followings 来获取用户关注人列表
     public function followings(){
 
-        return $this->belongToMany(User::class,'followers','follower_id','user_id');
+        return $this->belongsToMany(User::class,'followers','follower_id','user_id')->withTimestamps();
     }
 
 
@@ -99,6 +101,7 @@ class User extends Authenticatable
         if (!is_array($user_ids)) {
             $user_ids = compact('user_ids');
         }
+
         $this->followings()->sync($user_ids , false);
     }
 

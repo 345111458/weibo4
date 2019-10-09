@@ -77,6 +77,51 @@ class User extends Authenticatable
 
 
 
+    // 我们可以通过 followers 来获取粉丝关系列表
+    public function followers(){
+
+        return $this->belongsToMany(User::class,'followers','user_id','followers_id');
+    }
+
+
+
+    // 通过 followings 来获取用户关注人列表
+    public function followings(){
+
+        return $this->belongToMany(User::class,'followers','follower_id','user_id');
+    }
+
+
+
+    // 定义关注（follow）
+    public function follow($user_ids){
+
+        if (!is_array($user_ids)) {
+            $user_ids = compact('user_ids');
+        }
+        $this->followings()->sync($user_ids , false);
+    }
+
+
+
+    // 取消关注（unfollow）
+    public function unfollow($user_ids){
+
+        if (!is_array($user_ids)) {
+            $user_ids = compact('user_ids');
+        }
+        $this->followings()->detach($user_ids);
+    }
+
+
+
+    // 用于判断当前登录的用户 A 是否关注了用户 B
+    public function isFollowing($user_ids){
+
+        return $this->followings()->contains($user_ids);
+    }
+
+
 
 
 
